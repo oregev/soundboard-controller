@@ -1,0 +1,123 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+/* =========================== GENERAL ========================== */
+
+.round {
+	border-radius: 50px;
+	width: 20px;
+	height: 20px;
+}
+.switch {
+	width: 20px;
+	height: 20px;
+	background-color: crimson;
+}
+.switch:active {
+	background-color: tomato;
+}
+
+.label {
+	/* margin-top: -3px;
+	margin-bottom: 5px; */
+	font-size: 0.7rem;
+}
+
+.controllerContainer {
+	/* background-color: brown; */
+	height: 100vh;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.stripContainer {
+	/* background-color: burlywood; */
+	width: 100px;
+	border: 2px solid black;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	margin-right: 5px;
+}
+.container {
+	border-bottom: 1px solid black;
+	width: 100%;
+	padding: 5px;
+}
+
+/* =========================== PREAMP ========================== */
+.preampContainer {
+	display: flex;
+	justify-content: space-between;
+}
+.phaseBtn {
+	background-color: rgb(255, 237, 71);
+}
+.gainPopup {
+	position: absolute;
+	top: 20px;
+	left: 10px;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: space-between; */
+	border: 1px solid black;
+	padding: 5px;
+	border-radius: 4px;
+}
+.gainPopupBtn {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 1px solid black;
+}
+/* =========================== EQ ========================== */
+.hpfContainer {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 5px;
+	/* border-bottom: 1px solid black; */
+}
+.eqBandContainer {
+	display: flex;
+	justify-content: space-between;
+	margin: 5px 0px;
+}
+/* =========================== AUX ========================== */
+.auxContainer {
+	display: flex;
+	justify-content: space-around;
+}
+/* =========================== MUTE ========================== */
+.muteBtn {
+	width: 50px;
+	height: 30px;
+	border-radius: 4px;
+	background-color: tomato;
+}
+/* =========================== FADER ========================== */
+.faderContainer {
+	/* background-color: chartreuse; */
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.fader {
+	transform: rotate(-90deg);
+	width: 80px;
+}
+
+/* =========================== SELECT ========================== */
+.selectBtn {
+	width: 50px;
+	height: 30px;
+	border-radius: 4px;
+	background-color: rgb(255, 237, 71);
+}
