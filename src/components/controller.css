@@ -62,7 +62,7 @@
 }
 .gainPopup {
 	position: absolute;
-	top: 20px;
+	top: 15px;
 	left: 10px;
 	display: flex;
 	flex-direction: column;
@@ -77,17 +77,42 @@
 	border-radius: 50%;
 	border: 1px solid black;
 }
-/* =========================== EQ ========================== */
+/* =========================== HPF ========================== */
 .hpfContainer {
 	display: flex;
 	justify-content: space-around;
+	/* width: 100%;
+	background-color: brown; */
 	margin-bottom: 5px;
-	/* border-bottom: 1px solid black; */
+	border-bottom: 1px solid black;
 }
+.hpfPopup {
+	position: absolute;
+	top: 40px;
+	left: 270px;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: space-between; */
+	border: 1px solid black;
+	padding: 5px;
+	border-radius: 4px;
+}
+.hpfPopupBtn {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 1px solid black;
+}
+/* =========================== EQ ========================== */
 .eqBandContainer {
 	display: flex;
 	justify-content: space-between;
 	margin: 5px 0px;
+}
+.eqPopup {
+	position: absolute;
+	top: 150px;
+	left: 15px;
 }
 /* =========================== AUX ========================== */
 .auxContainer {
