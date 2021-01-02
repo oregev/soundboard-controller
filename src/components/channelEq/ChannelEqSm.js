@@ -7,30 +7,39 @@ export const ChannelEqSm = () => {
 	const [popupVis, setPopupVis] = useState(false);
 
 	const [eqState, setEqState] = useState([
-		{ bandName: "high", gain: 80, freq: 8000, q: 0.2 },
-		{ bandName: "highMid", gain: 50, freq: 3150, q: 0.2 },
-		{ bandName: "lowMid", gain: -100, freq: 250, q: 1 },
-		{ bandName: "low", gain: 30, freq: 80, q: 0.5 },
+		{ bandName: "high", isOn: true, gain: 80, freq: 8000, q: 0.2 },
+		{ bandName: "highMid", isOn: true, gain: 50, freq: 3150, q: 0.2 },
+		{ bandName: "lowMid", isOn: true, gain: -100, freq: 250, q: 1 },
+		{ bandName: "low", isOn: true, gain: 30, freq: 80, q: 0.5 },
 	]);
+
+	const eqColors = [
+		"rgb(145, 238, 145, 0.5)",
+		"rgb(173, 216, 230, 0.5)",
+		"rgb(255, 255, 0, 0.5)",
+		"rgb(255, 0, 0, 0.5)",
+	];
 
 	const draw = () => {
 		let ctx = context.current;
-		ctx.fillStyle = "lightGreen";
+		// ctx.fillStyle = "lightGreen";
 		ctx.clearRect(0, 0, 100, 100);
 		const MAX_FREQ = 20000;
 		const MIN_FREQ = 20;
 		const FREQ_STEP = 100 / (MAX_FREQ - MIN_FREQ); // 100 is canvas size.
 
-		eqState.forEach((band) => {
+		eqState.forEach((band, index) => {
 			const startPoint = band.freq * FREQ_STEP;
 			const peak = 50 - band.gain;
 			const endPoint = band.q * 100;
 
 			ctx.beginPath();
+			ctx.fillStyle = band.isOn ? eqColors[index] : "gray";
 			ctx.strokeStyle = "black";
 			ctx.moveTo(startPoint, 50);
 			ctx.quadraticCurveTo((startPoint + endPoint) / 2, peak, startPoint + endPoint, 50);
 			ctx.stroke();
+			ctx.fill();
 		});
 
 		//================ 0DB devider
