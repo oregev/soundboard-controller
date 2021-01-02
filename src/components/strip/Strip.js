@@ -3,7 +3,7 @@ import { ChannelPreamp } from "../channelPreamp/ChannelPreamp";
 import { ChannelHpf } from "../channelHpf/ChannelHpf";
 import { ChannelEqSm } from "../channelEq/ChannelEqSm";
 import { ChannelEq } from "../channelEq/ChannelEq";
-import { ChannelAux } from "../channelAux/ChannelAux";
+import { ChannelAuxSm } from "../channelAux/ChannelAuxSm";
 import { ChannelMute } from "../channelMute/ChannelMute";
 import { ChannelFader } from "../channelFader/ChannelFader";
 import { ChannelSelect } from "../channelSelect/ChannelSelect";
@@ -15,7 +15,8 @@ export const Strip = () => {
 			<ChannelHpf />
 			<ChannelEqSm />
 			<ChannelEq />
-			<ChannelAux />
+			<ChannelAuxSm />
+			{/* <ChannelAux /> */}
 			<ChannelMute />
 			<ChannelFader />
 			<ChannelSelect />

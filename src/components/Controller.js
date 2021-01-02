@@ -8,7 +8,7 @@ export const Controller = () => {
 	return (
 		<div className="controllerContainer">
 			<Strip />
-			<ChannelAuxSm />
+			{/* <ChannelAuxSm /> */}
 		</div>
 	);
 };

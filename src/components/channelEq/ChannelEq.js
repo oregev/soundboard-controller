@@ -11,14 +11,22 @@ export const ChannelEq = () => {
 					setPopupVis(true);
 				}}
 			></div>
-			{popupVis && <EqPopup />}
+			{popupVis && <EqPopup setPopupVis={setPopupVis} />}
 		</>
 	);
 };
 
-export const EqPopup = () => {
+export const EqPopup = ({ setPopupVis }) => {
 	return (
 		<div className="eqPopup">
+			<button
+				className="hpfPopupBtn"
+				onClick={() => {
+					setPopupVis(false);
+				}}
+			>
+				X
+			</button>
 			<div>
 				<button className="switch"></button>
 				<p className="label">eq on</p>

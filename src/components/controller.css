@@ -32,6 +32,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 }
 
 .stripContainer {
@@ -47,7 +48,7 @@
 	margin-right: 5px;
 }
 .container {
-	border-bottom: 1px solid black;
+	/* border-bottom: 1px solid black; */
 	width: 100%;
 	padding: 5px;
 }
@@ -89,7 +90,7 @@
 .hpfPopup {
 	position: absolute;
 	top: 40px;
-	left: 270px;
+	left: 310px;
 	display: flex;
 	flex-direction: column;
 	/* justify-content: space-between; */
@@ -109,15 +110,29 @@
 	justify-content: space-between;
 	margin: 5px 0px;
 }
+.eqBandContainer input {
+	/* width: 80px; */
+}
 .eqPopup {
 	position: absolute;
-	top: 150px;
-	left: 15px;
+	top: 160px;
+	left: 10px;
+	border: 1px solid black;
+	padding: 5px;
+	border-radius: 4px;
 }
 /* =========================== AUX ========================== */
 .auxContainer {
 	display: flex;
 	justify-content: space-around;
+}
+.auxPopup {
+	position: absolute;
+	top: 160px;
+	left: 300px;
+	border: 1px solid black;
+	width: 160px;
+	border-radius: 4px;
 }
 /* =========================== MUTE ========================== */
 .muteBtn {

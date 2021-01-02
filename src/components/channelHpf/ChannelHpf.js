@@ -18,7 +18,7 @@ export const ChannelHpf = () => {
 					<p className="label">hpf on</p>
 				</div>
 				<div>
-					<p className="round">{`${hpfFreq}hz`}</p>
+					<p className="">{`${hpfFreq}hz`}</p>
 					<p className="label">hpf</p>
 				</div>
 			</div>
