@@ -29,7 +29,16 @@ export const ChannelEqSm = () => {
 		const FREQ_STEP = 100 / (MAX_FREQ - MIN_FREQ); // 100 is canvas size.
 
 		eqState.forEach((band, index) => {
-			const startPoint = band.freq * FREQ_STEP;
+			const startPoint = Math.log2(+band.freq / 20) * 10;
+
+			// console.log("from freq", "80", " to pixel:", Math.log2(80 / 20) * 10);
+			// console.log("from freq", "250", "to pixel:", Math.log2(250 / 20) * 10);
+			// console.log("from freq", "3150", "to pixel:", Math.log2(3150 / 20) * 10);
+			// console.log("from freq", "8000", "to pixel:", Math.log2(8000 / 20) * 10);
+
+			//console.log(Math.sqrt(1250) / 2);
+			//const startPoint = band.freq * FREQ_STEP;
+			console.log("point", startPoint, "at freq", +band.freq);
 			const peak = 50 - band.gain;
 			const endPoint = band.q * 100;
 

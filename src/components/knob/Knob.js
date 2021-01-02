@@ -7,21 +7,29 @@ export const Knob = () => {
 
 	const [position, setPosition] = useState(0);
 
+	const KNOB_RADIUS = 50;
+	const TICK_W = 5;
+	const CANVAS_SIZE = 100;
+	const KNOB_CENTER = CANVAS_SIZE / 2;
+
 	const draw = () => {
 		const ctx = context.current;
-		ctx.clearRect(0, 0, 100, 100);
+
+		const tickEndPos = Math.sqrt((KNOB_RADIUS / 2) ** 2 * 2) / 2;
+
+		ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
 		ctx.beginPath();
 		// ctx.strokeStyle = "black";
 		ctx.fillStyle = "black";
-		ctx.arc(50, 50, 40, 0, 2 * Math.PI);
+		ctx.arc(KNOB_CENTER, KNOB_CENTER, 40, 0, 2 * Math.PI);
 		ctx.fill();
 
 		ctx.beginPath();
-		ctx.strokeStyle = "white";
-		ctx.moveTo(50, 15);
-		ctx.lineTo(50, 35);
-		ctx.lineWidth = 10;
+		ctx.strokeStyle = "red";
+		ctx.moveTo(tickEndPos, CANVAS_SIZE - tickEndPos);
+		ctx.lineTo(KNOB_RADIUS, KNOB_RADIUS);
+		ctx.lineWidth = TICK_W;
 		ctx.stroke();
 	};
 
@@ -39,7 +47,7 @@ export const Knob = () => {
 					style={{ border: "1px solid black", borderRadius: "50%", transform: `rotate(${position}deg)` }}
 				></canvas>
 			</div>
-			<input type="range" min={0} max={300} value={position} onChange={(e) => setPosition(e.target.value)} />
+			<input type="range" min={0} max={270} value={position} onChange={(e) => setPosition(e.target.value)} />
 		</>
 	);
 };
