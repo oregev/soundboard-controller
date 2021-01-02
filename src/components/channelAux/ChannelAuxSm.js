@@ -5,7 +5,7 @@ import { ChannelAux } from "../channelAux/ChannelAux";
 export const ChannelAuxSm = () => {
 	const canvasRef = useRef(null);
 	const context = useRef(null);
-	const [popupVis, setPopupVis] = useState(true);
+	const [popupVis, setPopupVis] = useState(false);
 	const [auxState, setAuxState] = useState([
 		{ auxNo: 1, isOn: true, sendVol: 80 },
 		{ auxNo: 2, isOn: true, sendVol: 50 },
@@ -19,10 +19,7 @@ export const ChannelAuxSm = () => {
 
 	const draw = () => {
 		const ctx = context.current;
-
 		let posY = 0;
-
-		// let auxState = [80, 50, 20, 70, 100, 30, 10, 80];
 		ctx.clearRect(0, 0, 100, 100);
 		auxState.forEach((aux) => {
 			ctx.fillStyle = aux.isOn ? "lightblue" : "gray";
@@ -39,11 +36,14 @@ export const ChannelAuxSm = () => {
 
 	return (
 		<>
-			<div>
+			<div
+				onClick={() => {
+					setPopupVis(true);
+				}}
+			>
 				<canvas ref={canvasRef} width="100px" height="100px" style={{ border: "1px solid black" }}></canvas>
 			</div>
-
-			{popupVis && <ChannelAux auxState={auxState} setAuxState={setAuxState} />}
+			{popupVis && <ChannelAux auxState={auxState} setAuxState={setAuxState} setPopupVis={setPopupVis} />}
 		</>
 	);
 };

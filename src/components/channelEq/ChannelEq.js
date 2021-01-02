@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 
-export const ChannelEq = () => {
-	const [popupVis, setPopupVis] = useState(false);
+export const ChannelEq = ({ eqState, setEqState, setPopupVis }) => {
+	const setEqGain = (name, gain) => {
+		const tempEqState = eqState.map((band) => {
+			return name === band.bandName ? { bandName: band.bandName, gain: gain, freq: band.freq, q: band.q } : band;
+		});
+		setEqState([...tempEqState]);
+	};
+	const setEqFreq = (name, freq) => {
+		const tempEqState = eqState.map((band) => {
+			return name === band.bandName ? { bandName: band.bandName, gain: band.gain, freq: freq, q: band.q } : band;
+		});
+		setEqState([...tempEqState]);
+	};
+	const setEqQ = (name, Q) => {
+		const tempEqState = eqState.map((band) => {
+			return name === band.bandName ? { bandName: band.bandName, gain: band.gain, freq: band.freq, q: Q } : band;
+		});
+		setEqState([...tempEqState]);
+	};
 
-	return (
-		<>
-			<div
-				className="container"
-				onClick={() => {
-					setPopupVis(true);
-				}}
-			></div>
-			{popupVis && <EqPopup setPopupVis={setPopupVis} />}
-		</>
-	);
-};
-
-export const EqPopup = ({ setPopupVis }) => {
 	return (
 		<div className="eqPopup">
 			<button
@@ -31,23 +34,42 @@ export const EqPopup = ({ setPopupVis }) => {
 				<button className="switch"></button>
 				<p className="label">eq on</p>
 			</div>
-			<EqBand />
-			<EqBand />
-			<EqBand />
-			<EqBand />
+			{eqState.map((band, index) => {
+				return <EqBand key={index} band={band} setEqGain={setEqGain} setEqFreq={setEqFreq} setEqQ={setEqQ} />;
+			})}
 		</div>
 	);
 };
 
-export const EqBand = () => {
+export const EqBand = ({ band, setEqGain, setEqFreq, setEqQ }) => {
 	return (
 		<div className="eqBandContainer">
 			<div style={{ border: "1px solid black" }}>
-				<input type="range" />
+				<p>{band.bandName}</p>
+				<input
+					type="range"
+					value={band.gain}
+					min={-100}
+					max={100}
+					onChange={(e) => setEqGain(band.bandName, e.target.value)}
+				/>
 				<p className="label">gain</p>
-				<input type="range" />
+				<input
+					type="range"
+					value={band.freq}
+					min={20}
+					max={20000}
+					onChange={(e) => setEqFreq(band.bandName, e.target.value)}
+				/>
 				<p className="label">freq</p>
-				<input type="range" />
+				<input
+					type="range"
+					value={band.q}
+					min={0.1}
+					max={2}
+					step={0.1}
+					onChange={(e) => setEqQ(band.bandName, e.target.value)}
+				/>
 				<p className="label">Q</p>
 			</div>
 		</div>
