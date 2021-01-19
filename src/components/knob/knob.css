@@ -1,3 +1,16 @@
+.knobAndRangeContainer {
+	position: relative;
+}
+
 .knobContainer {
 	border: 1px solid black;
+}
+
+.knobRange {
+	opacity: 0;
+	position: absolute;
+	top: 43px;
+	left: 12px;
+	transform: rotate(90deg);
+	width: 83px;
 }

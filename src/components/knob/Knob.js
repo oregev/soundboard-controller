@@ -11,11 +11,10 @@ export const Knob = () => {
 	const TICK_W = 5;
 	const CANVAS_SIZE = 100;
 	const KNOB_CENTER = CANVAS_SIZE / 2;
+	const tickEndPos = Math.sqrt((KNOB_RADIUS / 2) ** 2 * 2) / 2;
 
 	const draw = () => {
 		const ctx = context.current;
-
-		const tickEndPos = Math.sqrt((KNOB_RADIUS / 2) ** 2 * 2) / 2;
 
 		ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
@@ -38,16 +37,23 @@ export const Knob = () => {
 		draw();
 	});
 	return (
-		<>
+		<div className="knobAndRangeContainer">
 			<div className="knobContainer">
 				<canvas
 					ref={canvasRef}
-					width="100px"
-					height="100px"
+					width="100"
+					height="100"
 					style={{ border: "1px solid black", borderRadius: "50%", transform: `rotate(${position}deg)` }}
 				></canvas>
 			</div>
-			<input type="range" min={0} max={270} value={position} onChange={(e) => setPosition(e.target.value)} />
-		</>
+			<input
+				className="knobRange"
+				type="range"
+				min={0}
+				max={270}
+				value={position}
+				onChange={(e) => setPosition(e.target.value)}
+			/>
+		</div>
 	);
 };

@@ -7,10 +7,10 @@ export const ChannelEqSm = () => {
 	const [popupVis, setPopupVis] = useState(false);
 
 	const [eqState, setEqState] = useState([
-		{ bandName: "high", isOn: true, gain: 80, freq: 8000, q: 0.2 },
-		{ bandName: "highMid", isOn: true, gain: 50, freq: 3150, q: 0.2 },
-		{ bandName: "lowMid", isOn: true, gain: -100, freq: 250, q: 1 },
-		{ bandName: "low", isOn: true, gain: 30, freq: 80, q: 0.5 },
+		{ bandName: "high", isOn: true, gain: 0, freq: 40, q: 20 },
+		{ bandName: "highMid", isOn: true, gain: 100, freq: 80, q: 20 },
+		{ bandName: "lowMid", isOn: true, gain: -50, freq: 120, q: 20 },
+		{ bandName: "low", isOn: true, gain: 100, freq: 160, q: 20 },
 	]);
 
 	const eqColors = [
@@ -20,33 +20,31 @@ export const ChannelEqSm = () => {
 		"rgb(255, 0, 0, 0.5)",
 	];
 
+	const WIDTH = 200;
+	const HEIGHT = 100;
+
 	const draw = () => {
-		let ctx = context.current;
-		// ctx.fillStyle = "lightGreen";
-		ctx.clearRect(0, 0, 100, 100);
-		const MAX_FREQ = 20000;
-		const MIN_FREQ = 20;
-		const FREQ_STEP = 100 / (MAX_FREQ - MIN_FREQ); // 100 is canvas size.
+		const ctx = context.current;
+
+		ctx.clearRect(0, 0, WIDTH, HEIGHT);
+		ctx.fillStyle = "cornsilk";
+		ctx.fillRect(0, 0, WIDTH, HEIGHT);
+		ctx.fill();
 
 		eqState.forEach((band, index) => {
-			const startPoint = Math.log2(+band.freq / 20) * 10;
+			const freq = +band.freq;
+			const q = band.q / 2;
+			const gain = band.gain;
 
-			// console.log("from freq", "80", " to pixel:", Math.log2(80 / 20) * 10);
-			// console.log("from freq", "250", "to pixel:", Math.log2(250 / 20) * 10);
-			// console.log("from freq", "3150", "to pixel:", Math.log2(3150 / 20) * 10);
-			// console.log("from freq", "8000", "to pixel:", Math.log2(8000 / 20) * 10);
+			const start = { x: freq - q, y: HEIGHT / 2 };
+			const control1 = { x: freq + q, y: gain };
+			const control2 = { x: freq - q, y: gain };
+			const end = { x: freq + q, y: HEIGHT / 2 };
 
-			//console.log(Math.sqrt(1250) / 2);
-			//const startPoint = band.freq * FREQ_STEP;
-			console.log("point", startPoint, "at freq", +band.freq);
-			const peak = 50 - band.gain;
-			const endPoint = band.q * 100;
-
-			ctx.beginPath();
 			ctx.fillStyle = band.isOn ? eqColors[index] : "gray";
-			ctx.strokeStyle = "black";
-			ctx.moveTo(startPoint, 50);
-			ctx.quadraticCurveTo((startPoint + endPoint) / 2, peak, startPoint + endPoint, 50);
+			ctx.beginPath();
+			ctx.moveTo(start.x, start.y);
+			ctx.bezierCurveTo(control1.x, control1.y, control2.x, control2.y, end.x, end.y);
 			ctx.stroke();
 			ctx.fill();
 		});
@@ -54,16 +52,16 @@ export const ChannelEqSm = () => {
 		//================ 0DB devider
 		ctx.beginPath();
 		ctx.strokeStyle = "red";
-		ctx.moveTo(0, 50);
-		ctx.lineTo(100, 50);
+		ctx.moveTo(0, HEIGHT / 2);
+		ctx.lineTo(WIDTH, HEIGHT / 2);
 		ctx.stroke();
 
 		//================ low devider
-		ctx.beginPath();
-		ctx.strokeStyle = "red";
-		ctx.moveTo(100 * FREQ_STEP, 0);
-		ctx.lineTo(100 * FREQ_STEP, 100);
-		ctx.stroke();
+		// ctx.beginPath();
+		// ctx.strokeStyle = "red";
+		// ctx.moveTo(100 * FREQ_STEP, 0);
+		// ctx.lineTo(100 * FREQ_STEP, 100);
+		// ctx.stroke();
 	};
 
 	useEffect(() => {
@@ -78,9 +76,13 @@ export const ChannelEqSm = () => {
 					setPopupVis(true);
 				}}
 			>
-				<canvas ref={canvasRef} width="100px" height="100px" style={{ border: "1px solid black" }}></canvas>
+				<canvas ref={canvasRef} width="200" height="100" style={{ border: "1px solid black" }}></canvas>
 			</div>
 			{popupVis && <ChannelEq eqState={eqState} setEqState={setEqState} setPopupVis={setPopupVis} />}
+			<p>
+				{20 * Math.pow(2, eqState[0].freq / 10).toFixed(1)}
+				<span>hz</span>
+			</p>
 		</>
 	);
 };

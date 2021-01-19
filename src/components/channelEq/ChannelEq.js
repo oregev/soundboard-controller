@@ -63,6 +63,7 @@ export const ChannelEq = ({ eqState, setEqState, setPopupVis }) => {
 					/>
 				);
 			})}
+			<p>{`Slider: ${eqState[0].freq}`}</p>
 		</div>
 	);
 };
@@ -79,7 +80,7 @@ export const EqBand = ({ band, setEqGain, setBandOn, setEqFreq, setEqQ }) => {
 				<input
 					type="range"
 					value={band.gain}
-					min={-100}
+					min={0}
 					max={100}
 					onChange={(e) => setEqGain(band.bandName, e.target.value)}
 				/>
@@ -87,19 +88,13 @@ export const EqBand = ({ band, setEqGain, setBandOn, setEqFreq, setEqQ }) => {
 				<input
 					type="range"
 					value={band.freq}
-					min={20}
-					max={20000}
+					min={10}
+					max={190}
+					step={0.1}
 					onChange={(e) => setEqFreq(band.bandName, e.target.value)}
 				/>
 				<p className="label">freq</p>
-				<input
-					type="range"
-					value={band.q}
-					min={0.1}
-					max={2}
-					step={0.1}
-					onChange={(e) => setEqQ(band.bandName, e.target.value)}
-				/>
+				<input type="range" value={band.q} min={5} max={70} onChange={(e) => setEqQ(band.bandName, e.target.value)} />
 				<p className="label">Q</p>
 			</div>
 		</div>
